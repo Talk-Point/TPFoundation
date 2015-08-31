@@ -19,7 +19,7 @@ class TPLogManager
         $this->log->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
     }
 
-    public function info($message)
+    public function info($message, array $options = [])
     {
         $this->log->addInfo($message);
     }
@@ -27,5 +27,15 @@ class TPLogManager
     public function debug($message, array $options = [])
     {
         $this->log->addDebug($message, $options);
+    }
+
+    public function error($message, array $options = [])
+    {
+        $this->log->addError($message, $options);
+    }
+
+    public function critical($message, array $options = [])
+    {
+        $this->log->addCritical($message, $options);
     }
 }
