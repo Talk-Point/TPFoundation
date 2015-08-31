@@ -1,0 +1,28 @@
+{
+  "name": "Talk-Point/TPFoundation",
+  "description": "The Talk-Point Foundation Framework",
+  "keywords": ["framework", "foundation"],
+  "type": "lib",
+  "require": {
+    "php": ">=5.5.9",
+    "tedivm/stash": "^0.13.1",
+    "pda/pheanstalk": "^3.0",
+    "predis/predis": "^1.0",
+    "ramsey/uuid": "~2.8"
+  },
+  "require-dev": {
+    "mockery/mockery": "0.9.*",
+    "phpunit/phpunit": "~4.0",
+    "phpspec/phpspec": "~2.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "TPFoundation\\": "src"
+    }
+  },
+  "autoload-dev": {
+  },
+  "config": {
+    "preferred-install": "dist"
+  }
+}
