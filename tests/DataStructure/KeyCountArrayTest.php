@@ -2,7 +2,7 @@
 
 use TPFoundation\DataStructure\KeyCountArray;
 
-class KeyCountArrayTest extends TestCase
+class KeyCountArrayTest extends PHPUnit_Framework_TestCase
 {
     public function test_add()
     {

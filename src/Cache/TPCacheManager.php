@@ -29,11 +29,19 @@ class TPCacheManager
     public function __construct()
     {
         $driver = new Stash\Driver\FileSystem();
-        $driver->setOptions(['path' => storage_path().'/framework/cache/stash']);
+        $driver->setOptions(['path' => $this->storagePath().'/framework/cache/stash']);
 
         $this->pool = new Stash\Pool($driver);
 
         return $this->pool;
+    }
+
+    public function storagePath()
+    {
+        if (function_exists("storage_path")) {
+            return storage_path();
+        }
+        return '/tmp/';
     }
 
     /**

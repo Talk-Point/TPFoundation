@@ -2,7 +2,7 @@
 
 use TPFoundation\Cache\TPCacheManager;
 
-class TPCacheManagerTest extends TestCase
+class TPCacheManagerTest extends PHPUnit_Framework_TestCase
 {
     public function test_get()
     {

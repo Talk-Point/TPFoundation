@@ -1,11 +1,11 @@
-<?php /** Array, das beim hinzufügen doppelter Keys, die Anzahl in einem Count speichert */
+<?php /** Array, das beim hinzufÃ¼gen doppelter Keys, die Anzahl in einem Count speichert */
 namespace TPFoundation\DataStructure;
 
 
 /**
  * Key Count Array
  *
- * Statt doppelte Einträge im Array zu haben, werden diese gezählt ine inem count value
+ * Statt doppelte Eintrï¿½ge im Array zu haben, werden diese gezï¿½hlt ine inem count value
  * array product structure
  * [
  *      'pk' => ['count' => 1, data => $data],
@@ -22,7 +22,7 @@ namespace TPFoundation\DataStructure;
 class KeyCountArray implements \Iterator
 {
     /**
-     * Array was den Content vorhält
+     * Array was den Content vorhï¿½lt
      * @var array
      */
     protected $content;
@@ -45,7 +45,7 @@ class KeyCountArray implements \Iterator
     }
 
     /**
-     * Wird gefeuert, nachdem sich etwas am ARray geändert hat
+     * Wird gefeuert, nachdem sich etwas am ARray geï¿½ndert hat
      */
     public function changeNotification()
     {
@@ -53,11 +53,11 @@ class KeyCountArray implements \Iterator
     }
 
     /**
-     * Fügt ein Element zum Array hinzu
+     * Fï¿½gt ein Element zum Array hinzu
      *
-     * Fügt ein Element hinzu, sollte dieser Key bereits exestieren. Wird der Count des Elements erhöht.
+     * Fï¿½gt ein Element hinzu, sollte dieser Key bereits exestieren. Wird der Count des Elements erhï¿½ht.
      *
-     * @param string $pk Eindeutiger Schlüssel
+     * @param string $pk Eindeutiger Schlï¿½ssel
      * @param mixed $data Daten die vorgehalten werden sollen
      */
     public function add($pk, $data)
@@ -77,8 +77,8 @@ class KeyCountArray implements \Iterator
     }
 
     /**
-     * Fügt ein neues Item dem Content Array hinzu
-     * @param string $pk Eindeutiger Schlüssel
+     * Fï¿½gt ein neues Item dem Content Array hinzu
+     * @param string $pk Eindeutiger Schlï¿½ssel
      * @param mixed $data Daten die vorgehalten werden sollen
      */
     protected function addNewItem($pk, $data)
@@ -87,8 +87,8 @@ class KeyCountArray implements \Iterator
     }
 
     /**
-     * Erhöht den Count eines Elements, weil es schon exestiert als Key
-     * @param string $pk Eindeutiger Schlüssel
+     * Erhï¿½ht den Count eines Elements, weil es schon exestiert als Key
+     * @param string $pk Eindeutiger Schlï¿½ssel
      * @param mixed $data Daten die vorgehalten werden sollen
      */
     protected function addExistsItem($pk, $data)
@@ -99,8 +99,8 @@ class KeyCountArray implements \Iterator
 
     /**
      * Entfernt ein Element aus dem Array
-     * @param string $pk Eindeutiger Schlüssel
-     * @param bool|false $force gibt an ob alle Elemente aus dem Array gelöscht werden sollen mit dem Key $pk
+     * @param string $pk Eindeutiger Schlï¿½ssel
+     * @param bool|false $force gibt an ob alle Elemente aus dem Array gelï¿½scht werden sollen mit dem Key $pk
      * @return bool Gibt an ob das Element mit dem key im Array exestiert hat
      */
     public function remove($pk, $force = false)
@@ -126,7 +126,7 @@ class KeyCountArray implements \Iterator
 
     /**
      * Entfernt das Element direkt
-     * @param string $pk Eindeutiger Schlüssel
+     * @param string $pk Eindeutiger Schlï¿½ssel
      */
     protected function removeForce($pk)
     {
@@ -135,7 +135,7 @@ class KeyCountArray implements \Iterator
 
     /**
      * Entfernt das Element oder Decrementiert den Count
-     * @param string $pk Eindeutiger Schlüssel
+     * @param string $pk Eindeutiger Schlï¿½ssel
      */
     protected function removeKeyOrDecrementCOuntBase($pk)
     {
@@ -148,7 +148,7 @@ class KeyCountArray implements \Iterator
 
     /**
      * Testet ob ein Key im Array exestiert
-     * @param string $pk Eindeutiger Schlüssel
+     * @param string $pk Eindeutiger Schlï¿½ssel
      * @return bool
      */
     protected function keyExists($pk)
@@ -157,7 +157,7 @@ class KeyCountArray implements \Iterator
     }
 
     /**
-     * Löscht das Array
+     * Lï¿½scht das Array
      */
     public function clear()
     {
@@ -165,7 +165,7 @@ class KeyCountArray implements \Iterator
     }
 
     /**
-     * Gibt die Anzahl der Elemente zurück, Elemente * Count
+     * Gibt die Anzahl der Elemente zurï¿½ck, Elemente * Count
      * @return int Anzahl der Elemente mal ihren Count
      */
     public function count()
