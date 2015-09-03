@@ -14,7 +14,11 @@ class TPLogManager
      */
     public function __construct()
     {
-        $logTitle = env('TP_LOG_NAME', 'TPLog');
+        $logTitle = getenv('TP_LOG_NAME');
+        if ($logTitle == false) {
+            $logTitle = 'TPLog';
+        }
+
         $this->log = new Logger($logTitle);
         $this->log->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
     }
