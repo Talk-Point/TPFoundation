@@ -188,7 +188,7 @@ class KeyCountArray implements \Iterator
         $index = $this->index_count;
         $key = $this->index[$index];
 
-        return $this->content[$key];
+        return [$key, $this->content[$key]];
     }
 
     /**
