@@ -15,3 +15,6 @@ matrix:
   allow_failures:
     - php: hhvm
   fast_finish: true
+
+notifications:
+  slack: talk-point:KKWcziADw3uRP3jOmUasdG14
