@@ -1,10 +1,10 @@
-<?php /** File repräsentation */
+<?php /** File reprÃ¤sentation */
 namespace TPFoundation\Parser;
 
 use Exception;
 use Iterator;
-use TPFoundation\Parser\Exceptions\FileException;
-use TPFoundation\Parser\Exceptions\FileNotReadableException;
+use TPFoundation\Parser\Exception\FileException;
+use TPFoundation\Parser\Exception\FileNotReadableException;
 
 /**
  * File Class is representiert ein file auf dem Dateisystem
@@ -61,7 +61,7 @@ class File extends \SplFileObject implements Iterator
     }
 
     /**
-     * Gibt die Anzahl der Zeilen zurück
+     * Gibt die Anzahl der Zeilen zurï¿½ck
      * @return int count
      */
     public function getLinesCount()

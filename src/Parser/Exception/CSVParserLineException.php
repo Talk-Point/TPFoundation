@@ -1,5 +1,5 @@
 <?php /** CSVParserLineException can not parse line (starts by 0) */
-namespace TPFoundation\Parser\Exceptions;
+namespace TPFoundation\Parser\Exception;
 use Exception;
 
 /**

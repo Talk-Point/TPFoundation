@@ -1,5 +1,5 @@
 <?php /** File konnte nicht gelesen werden */
-namespace TPFoundation\Parser\Exceptions;
+namespace TPFoundation\Parser\Exception;
 
 use Exception;
 

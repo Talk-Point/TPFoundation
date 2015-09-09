@@ -1,13 +1,13 @@
-<?php /** File General Exception */
-namespace TPFoundation\Parser\Exceptions;
+<?php /** CSVParser General Exception */
+namespace TPFoundation\Parser\Exception;
 
 use Exception;
 
 /**
- * File General Exception
+ * CSVParser General Exception
  * @package TPFoundation\Helper\Exception
  */
-class FileException extends \Exception
+class CSVParserException extends \Exception
 {
     /**
      * (PHP 5 &gt;= 5.1.0)<br/>

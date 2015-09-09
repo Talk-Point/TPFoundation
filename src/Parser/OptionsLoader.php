@@ -15,8 +15,13 @@ trait OptionsLoader
      * @param $var Variable in die es gespeichert werden soll
      * @param string $default Default Value der Variable
      */
-    public function optionLoadVar(array $options, $name, $var, $default)
+    public function optionLoadVar(array $options, $name, $default)
     {
-        array_key_exists($name, $options) ? $var = $options[$name] : $var = $default;
+        if (array_key_exists($name, $options)) {
+            $v = $options[$name];
+            return $v;
+        } else {
+            return $default;
+        }
     }
 }
