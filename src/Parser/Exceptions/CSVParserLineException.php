@@ -1,13 +1,12 @@
-<?php /** File konnte nicht gelesen werden */
-namespace TPFoundation\Parser\Helper\Exceptions;
-
+<?php /** CSVParserLineException can not parse line (starts by 0) */
+namespace TPFoundation\Parser\Exceptions;
 use Exception;
 
 /**
- * File kann nicht zum lesen geöffnet werden
+ * CSVParser Line Exception, can not parse line
  * @package TPFoundation\Helper\Exception
  */
-class FileNotReadableException extends FileException
+class CSVParserLineException extends CSVParserException
 {
     /**
      * (PHP 5 &gt;= 5.1.0)<br/>

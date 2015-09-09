@@ -3,8 +3,8 @@ namespace TPFoundation\Parser;
 
 use Exception;
 use Iterator;
-use TPFoundation\Helper\Exception\FileException;
-use TPFoundation\Helper\Exception\FileNotReadableException;
+use TPFoundation\Parser\Exceptions\FileException;
+use TPFoundation\Parser\Exceptions\FileNotReadableException;
 
 /**
  * File Class is representiert ein file auf dem Dateisystem

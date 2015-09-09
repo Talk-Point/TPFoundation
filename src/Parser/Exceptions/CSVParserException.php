@@ -1,12 +1,13 @@
-<?php /** CSVParserLineException can not parse line (starts by 0) */
-namespace TPFoundation\Parser\Exception;
+<?php /** CSVParser General Exception */
+namespace TPFoundation\Parser\Exceptions;
+
 use Exception;
 
 /**
- * CSVParser Line Exception, can not parse line
+ * CSVParser General Exception
  * @package TPFoundation\Helper\Exception
  */
-class CSVParserLineException extends CSVParserException
+class CSVParserException extends \Exception
 {
     /**
      * (PHP 5 &gt;= 5.1.0)<br/>
