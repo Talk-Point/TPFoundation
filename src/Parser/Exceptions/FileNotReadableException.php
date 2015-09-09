@@ -1,13 +1,13 @@
-<?php /** CSVParser General Exception */
-namespace TPFoundation\Parser\Exception;
+<?php /** File konnte nicht gelesen werden */
+namespace TPFoundation\Parser\Exceptions;
 
 use Exception;
 
 /**
- * CSVParser General Exception
+ * File kann nicht zum lesen ge�ffnet werden
  * @package TPFoundation\Helper\Exception
  */
-class CSVParserException extends \Exception
+class FileNotReadableException extends FileException
 {
     /**
      * (PHP 5 &gt;= 5.1.0)<br/>

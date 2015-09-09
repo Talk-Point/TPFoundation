@@ -1,5 +1,5 @@
 <?php /** File General Exception */
-namespace TPFoundation\Parser\Helper\Exceptions;
+namespace TPFoundation\Parser\Exceptions;
 
 use Exception;
 

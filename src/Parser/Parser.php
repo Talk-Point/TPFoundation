@@ -2,8 +2,6 @@
 
 namespace TPFoundation\Parser;
 use Exception;
-use TPFoundation\Parser\File;
-use TPFoundation\Parser\OptionsLoader;
 
 /**
  * Abstrakter Parser
