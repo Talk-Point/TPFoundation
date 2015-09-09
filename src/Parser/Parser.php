@@ -2,6 +2,8 @@
 
 namespace TPFoundation\Parser;
 use Exception;
+use TPFoundation\Parser\File;
+use TPFoundation\Parser\OptionsLoader;
 
 /**
  * Abstrakter Parser
@@ -50,8 +52,8 @@ abstract class Parser implements ParserInterface
             throw new \InvalidArgumentException('OptionsLoader not a array');
         }
 
-        $this->optionLoadVar($options, 'line_start', $this->line_start, 0);
-        $this->optionLoadVar($options, 'line_end', $this->line_start, null);
+        $this->line_start = $this->optionLoadVar($options, 'line_start', 0);
+        $this->line_end = $this->optionLoadVar($options, 'line_end', null);
         $this->error_line_array = [];
         $this->is_errors_by_parsing = false;
         $this->file = new File($path, $line_start_position=$this->line_start, $line_end_position=$this->line_end);

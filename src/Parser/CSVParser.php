@@ -13,7 +13,7 @@ namespace TPFoundation\Parser;
  *      ]);
  *      $csv->parse($headerCall=function() use($mock){
  *          return true;
- *      }, $lineCall=function($line_array, $line_string, $line_count) use ($mock) {
+ *      }, $lineCall=function($line_array, $line_string, $line_count, $header_array) use ($mock) {
  *          return true; // False falls die Zeile nicht erfolgreich geparst werden konnte
  *      });
  */
@@ -52,9 +52,10 @@ class CSVParser extends Parser
     {
         parent::__construct($path, $options);
 
-        $this->optionLoadVar($options, 'delimiter', $this->delimiter, ',');
-        $this->optionLoadVar($options, 'is_header', $this->is_header, '"');
-        $this->optionLoadVar($options, 'escape', $this->is_header, '\\');
+        $this->delimiter = $this->optionLoadVar($options, 'delimiter', ',');
+        $this->enclosure = $this->optionLoadVar($options, 'enclosure', '"');
+        $this->is_header = $this->optionLoadVar($options, 'is_header', false);
+        $this->escape = $this->optionLoadVar($options, 'escape', '\\');
     }
 
     /**
@@ -69,10 +70,12 @@ class CSVParser extends Parser
         $lcall = $lineCall;
         $this->parseLineByLine(function($line_count, $line_string) use ($hcall, $lcall) {
             $line_array = $this->splitCSVString($line_string);
+            $header_array = null;
             if (($line_count==0) AND ($this->is_header)) {
                 $rv = $hcall($line_count, $line_array);
+                $header_array = $line_array;
             } else {
-                $rv = $lcall($line_array, $line_string, $line_count);
+                $rv = $lcall($line_array, $line_string, $line_count, $header_array);
             }
             return $rv;
         });
