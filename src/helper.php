@@ -25,3 +25,23 @@ if (!function_exists("tpenv")) {
         }
     }
 }
+
+if (!function_exists("array_key_not_exits_exception")) {
+    /**
+     * Testen ob der Key exestiert ansonsten eine Exception werfen
+     * @param string $key
+     * @param array $array
+     * @param Exception|string $exception
+     * @throws Exception
+     */
+    function array_key_not_exits_exception($key, $array, $exception)
+    {
+        if (!array_key_exists($key, $array)) {
+            if (is_object($exception)) {
+                throw new $exception;
+            } else {
+                throw new Exception($exception);
+            }
+        }
+    }
+}
