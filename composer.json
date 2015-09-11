@@ -8,7 +8,8 @@
     "tedivm/stash": "^0.13.1",
     "pda/pheanstalk": "^3.0",
     "predis/predis": "^1.0",
-    "ramsey/uuid": "~2.8"
+    "ramsey/uuid": "~2.8",
+    "monolog/monolog": "^1.17"
   },
   "require-dev": {
     "mockery/mockery": "0.9.*",

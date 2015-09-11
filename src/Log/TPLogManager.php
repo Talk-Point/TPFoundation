@@ -14,13 +14,20 @@ class TPLogManager
      */
     public function __construct()
     {
-        $logTitle = getenv('TP_LOG_NAME');
-        if ($logTitle == false) {
-            $logTitle = 'TPLog';
+        $logTitle = tpenv('TP_LOG_NAME', 'TP-Log');
+
+        $log = tpenv('TP_LOG', 'developement');
+        $this->log = new Logger($logTitle);
+        if ($log == 'developement') {
+            $this->log->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
+        } else {
+            $slack_token = tpenv('TP_LOG_SLACK_TOKEN');
+            $slack_room = tpenv('TP_LOG_SLACK_ROOM');
+            $slackHandler = new \Monolog\Handler\SlackHandler($slack_token, $slack_room);
+            $slackHandler->setFormatter(new \Monolog\Formatter\LineFormatter());
+            $this->log->pushHandler($slackHandler, Logger::INFO);
         }
 
-        $this->log = new Logger($logTitle);
-        $this->log->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
     }
 
     public function info($message, array $options = [])
