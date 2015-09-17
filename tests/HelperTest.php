@@ -30,4 +30,11 @@ class HelperTest extends PHPUnit_Framework_TestCase
         }
         $this->assertTrue($exception, 'Exception not firing');
     }
+
+    public function test_underscoreToCamcelCase()
+    {
+        $string = 'preislistenfaktor_hersteller_a';
+
+        $this->assertEquals('PreislistenfaktorHerstellerA', underscore2Camelcase($string));
+    }
 }
