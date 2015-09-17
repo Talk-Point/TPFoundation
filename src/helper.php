@@ -45,3 +45,23 @@ if (!function_exists("array_key_not_exits_exception")) {
         }
     }
 }
+
+if (!function_exists("underscore2Camelcase")) {
+    /**
+     * Underscore to CamcelCase
+     * @param $str
+     * @return string
+     */
+    function underscore2Camelcase($str)
+    {
+        // Split string in words.
+        $words = explode('_', strtolower($str));
+
+        $return = '';
+        foreach ($words as $word) {
+            $return .= ucfirst(trim($word));
+        }
+
+        return $return;
+    }
+}
