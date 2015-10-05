@@ -28,7 +28,7 @@ class TPLogManager
 
     public function info($message, array $options = [])
     {
-        $this->log->addInfo($message);
+        $this->log->addInfo($message, $options);
     }
 
     public function debug($message, array $options = [])
