@@ -21,11 +21,7 @@ class TPLogManager
         if ($log == 'developement') {
             $this->log->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
         } else {
-            $slack_token = tpenv('TP_LOG_SLACK_TOKEN');
-            $slack_room = tpenv('TP_LOG_SLACK_ROOM');
-            $slackHandler = new \Monolog\Handler\SlackHandler($slack_token, $slack_room);
-            $slackHandler->setFormatter(new \Monolog\Formatter\LineFormatter());
-            $this->log->pushHandler($slackHandler, Logger::INFO);
+            $this->log->pushHandler(new StreamHandler(storage_path().'/logs/'.$logTitle.'.log', Logger::DEBUG));
         }
 
     }
