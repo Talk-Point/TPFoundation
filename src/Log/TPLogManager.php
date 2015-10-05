@@ -16,7 +16,7 @@ class TPLogManager
     {
         $logTitle = tpenv('TP_LOG_NAME', 'TP-Log');
 
-        $log = tpenv('TP_LOG', 'developement');
+        $log = tpenv('TP_LOG', 'production');
         $this->log = new Logger($logTitle);
         if ($log == 'developement') {
             $this->log->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
