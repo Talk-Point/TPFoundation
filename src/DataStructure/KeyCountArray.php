@@ -1,7 +1,6 @@
 <?php /** Array, das beim hinzufügen doppelter Keys, die Anzahl in einem Count speichert */
 namespace TPFoundation\DataStructure;
 
-
 /**
  * Key Count Array
  *
