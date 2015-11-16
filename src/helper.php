@@ -65,3 +65,14 @@ if (!function_exists("underscore2Camelcase")) {
         return $return;
     }
 }
+
+if (!function_exists("array_has_keys")) {
+    function array_has_keys($keys, $array) {
+        foreach ($keys as $key) {
+            if (!array_key_exists($key, $array)) {
+                return false;
+            }
+        }
+        return true;
+    }
+}

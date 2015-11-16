@@ -37,4 +37,15 @@ class HelperTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('PreislistenfaktorHerstellerA', underscore2Camelcase($string));
     }
+
+    public function test_array_has_keys()
+    {
+        $array = [
+            'a' => 'a',
+            'b' => 'b'
+        ];
+        $keys = ['a', 'b'];
+
+        $this->assertTrue(array_has_keys($keys, $array));
+    }
 }
