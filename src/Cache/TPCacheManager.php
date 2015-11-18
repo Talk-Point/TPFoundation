@@ -28,8 +28,19 @@ class TPCacheManager
      */
     public function __construct()
     {
-        $driver = new Stash\Driver\FileSystem();
-        $driver->setOptions(['path' => $this->storagePath().'/framework/cache/stash']);
+        $cache_driver = tpenv('TP_CACHE_DRIVER', 'file');
+        switch($cache_driver)
+        {
+            case 'redis':
+                $driver = new Stash\Driver\Redis();
+                $server = tpenv('TP_CACHE_SERVER', '127.0.0.1');
+                $server_port = tpenv('TP_CACHE_SERVER_PORT', '6379');
+                $driver->setOptions(['servers' => [$server, $server_port]]);
+                break;
+            default:
+                $driver = new Stash\Driver\FileSystem();
+                $driver->setOptions(['path' => $this->storagePath().'/framework/cache/stash']);
+        }
 
         $this->pool = new Stash\Pool($driver);
 
