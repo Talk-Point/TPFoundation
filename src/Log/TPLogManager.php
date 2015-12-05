@@ -27,8 +27,9 @@ class TPLogManager
             $output = "%channel%.%level_name%: %message%";
             $formatter = new LineFormatter($output);
             // Setup the logger
-            $host = tpenv('TP_LOG_PAPERTRAIL', 'HOST');
-            $syslogHandler = new SyslogUdpHandler($host.".papertrailapp.com", $host);
+            $host = tpenv('TP_LOG_PAPERTRAIL_HOST', 'HOST');
+            $port = tpenv('TP_LOG_PAPERTRAIL_PORT', 'PORT');
+            $syslogHandler = new SyslogUdpHandler($host.".papertrailapp.com", $port);
             $syslogHandler->setFormatter($formatter);
             $this->log->pushHandler($syslogHandler);
         } else {
