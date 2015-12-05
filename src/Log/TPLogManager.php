@@ -4,6 +4,8 @@ namespace TPFoundation\Log;
 
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+use Monolog\Formatter\LineFormatter;
+use Monolog\Handler\SyslogUdpHandler;
 
 class TPLogManager
 {
@@ -20,6 +22,15 @@ class TPLogManager
         $this->log = new Logger($logTitle);
         if ($log == 'developement') {
             $this->log->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
+        } elseif($log == 'papertrail') {
+            // set format
+            $output = "%channel%.%level_name%: %message%";
+            $formatter = new LineFormatter($output);
+            // Setup the logger
+            $host = tpenv('TP_LOG_PAPERTRAIL', 'HOST');
+            $syslogHandler = new SyslogUdpHandler($host.".papertrailapp.com", $host);
+            $syslogHandler->setFormatter($formatter);
+            $this->log->pushHandler($syslogHandler);
         } else {
             $this->log->pushHandler(new StreamHandler(storage_path().'/logs/'.$logTitle.'.log', Logger::DEBUG));
         }
