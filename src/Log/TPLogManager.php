@@ -31,7 +31,7 @@ class TPLogManager
             $port = tpenv('TP_LOG_PAPERTRAIL_PORT', 'PORT');
             $syslogHandler = new SyslogUdpHandler($host.".papertrailapp.com", $port);
             $syslogHandler->setFormatter($formatter);
-            $this->log->pushHandler($syslogHandler);
+            $this->log->pushHandler($syslogHandler, Logger::INFO);
         } else {
             $this->log->pushHandler(new StreamHandler(storage_path().'/logs/'.$logTitle.'.log', Logger::DEBUG));
         }
