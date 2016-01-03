@@ -91,6 +91,7 @@ if (!function_exists('envconsul')) {
     function envconsul($value, $default_host, $default_port) {
         if (is_envconsul()) {
             try {
+                $value = tpenv($value);
                 $service_array = dns_get_record($value, DNS_SRV);
                 $port = $service_array[0]['port'];
                 $target = $service_array[0]['target'];
