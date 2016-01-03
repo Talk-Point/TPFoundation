@@ -76,3 +76,39 @@ if (!function_exists("array_has_keys")) {
         return true;
     }
 }
+
+/**
+ * Consul Helper
+ */
+if ( !function_exists('is_envconsul')) {
+    function is_envconsul()
+    {
+        return tpenv('APP_CONSUL', false);
+    }
+}
+
+if ( !function_exists('envconsul_target_ip')) {
+    function envconsul_target_ip($value, $default = '')
+    {
+        if (is_envconsul()) {
+            $m = TPFoundation\Consul\ConsulManager::getInstance();
+            $s = $m->getService($value);
+            return $s->getTargetIp();
+        } else {
+            return tpenv($value, $default);
+        }
+    }
+}
+
+if ( !function_exists('envconsul_target_port')) {
+    function envconsul_target_port($value, $default='')
+    {
+        if (is_envconsul()) {
+            $m = TPFoundation\Consul\ConsulManager::getInstance();
+            $s = $m->getService($value);
+            return $s->getTargetPort();
+        } else {
+            return tpenv($value, $default);
+        }
+    }
+}
