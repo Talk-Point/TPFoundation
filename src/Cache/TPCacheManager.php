@@ -2,6 +2,8 @@
 
 namespace TPFoundation\Cache;
 
+use Exception;
+use RedisException;
 use Stash;
 use TPFoundation\Log\TPLog;
 
@@ -29,11 +31,19 @@ class TPCacheManager
     public function __construct()
     {
         $cache_driver = tpenv('TP_CACHE_DRIVER', 'file');
+        $this->createPool();
+        return $this->pool;
+    }
+
+    protected function createPool()
+    {
+        $cache_driver = tpenv('TP_CACHE_DRIVER', 'file');
         switch($cache_driver)
         {
             case 'redis':
                 $driver = new Stash\Driver\Redis();
                 list($server, $server_port) = envconsul('TP_CACHE_SERVER', '127.0.0.1', 6379);
+                TPLog::debug('Server Config: ', ['server' => $server, 'port' => $server_port]);
                 $driver->setOptions(['servers' => [[$server, $server_port]]]);
                 break;
             default:
@@ -42,8 +52,6 @@ class TPCacheManager
         }
 
         $this->pool = new Stash\Pool($driver);
-
-        return $this->pool;
     }
 
     public function storagePath()
@@ -72,10 +80,18 @@ class TPCacheManager
      * @param null $setCallback
      * @param int $timeout
      * @return Stash\Item
+     * @throws Exception
      */
     public function get($itemName, $setCallback=null, $timeout = 3600)
     {
-        return $this->getItem($itemName, $setCallback, $timeout)->get();
+        try {
+            return $this->getItem($itemName, $setCallback, $timeout)->get();
+        } catch (RedisException $e) {
+            $this->createPool();
+            return $this->get($itemName, $setCallback, $timeout);
+        } catch (Exception $e) {
+            throw new Exception('TPCache: can not get');
+        }
     }
 
     /**
@@ -103,14 +119,22 @@ class TPCacheManager
      * @param string|array $itemName eindeutigr Path zum Item
      * @param mixed $data Daten die gesetzt werden sollen
      * @param int $timeout Timeout in milliseconds
+     * @throws Exception
      */
     public function set($itemName, $data, $timeout=3600)
     {
-        if (is_array($itemName)) {
-            $itemName = $this->itemNameArrayToPath($itemName);
+        try {
+            if (is_array($itemName)) {
+                $itemName = $this->itemNameArrayToPath($itemName);
+            }
+            $item = $this->pool->getItem($itemName);
+            $item->set($data, $timeout);
+        } catch (RedisException $e) {
+            $this->createPool();
+            return $this->set($itemName, $data, $timeout);
+        } catch (Exception $e) {
+            throw new Exception('TPCache: can not set');
         }
-        $item = $this->pool->getItem($itemName);
-        $item->set($data, $timeout);
     }
 
     /**
