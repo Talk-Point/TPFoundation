@@ -87,28 +87,21 @@ if ( !function_exists('is_envconsul')) {
     }
 }
 
-if ( !function_exists('envconsul_target_ip')) {
-    function envconsul_target_ip($value, $default = '')
-    {
+if (!function_exists('envconsul')) {
+    function envconsul($value, $default_host, $default_port) {
         if (is_envconsul()) {
-            $m = TPFoundation\Consul\ConsulManager::getInstance();
-            $s = $m->getService($value);
-            return $s->getTargetIp();
+            try {
+                $service_array = dns_get_record($value, DNS_SRV);
+                $port = $service_array[0]['port'];
+                $target = $service_array[0]['target'];
+                $service_array = dns_get_record($target, DNS_A);
+                $ip = $service_array[0]['ip'];
+            } catch (Exception $e) {
+                throw new Exception('ENVConsul Exception: can not reache host: '.$value);
+            }
+            return [$ip, $port];
         } else {
-            return tpenv($value, $default);
-        }
-    }
-}
-
-if ( !function_exists('envconsul_target_port')) {
-    function envconsul_target_port($value, $default='')
-    {
-        if (is_envconsul()) {
-            $m = TPFoundation\Consul\ConsulManager::getInstance();
-            $s = $m->getService($value);
-            return $s->getTargetPort();
-        } else {
-            return tpenv($value, $default);
+            return [tpenv($value, $default_host), $default_port];
         }
     }
 }

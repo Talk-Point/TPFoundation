@@ -58,4 +58,10 @@ class HelperTest extends PHPUnit_Framework_TestCase
 
         $this->assertFalse(array_has_keys($keys, $array));
     }
+
+    /*public function test_consul()
+    {
+        list($host, $port) = envconsul('redis-redis.service.consul', '127.0.0.1', 6379);
+        var_dump($host, $port);
+    }*/
 }
