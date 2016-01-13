@@ -93,10 +93,18 @@ if (!function_exists('envconsul')) {
             try {
                 $value = tpenv($value);
                 $service_array = dns_get_record($value, DNS_SRV);
-                $port = $service_array[0]['port'];
-                $target = $service_array[0]['target'];
+                if (count($service_array)>0) {
+                    $target = $service_array[0]['target'];
+                    $port = $service_array[0]['port'];
+                } else {
+                    return [tpenv($value, $default_host), $default_port];
+                }
                 $service_array = dns_get_record($target, DNS_A);
-                $ip = $service_array[0]['ip'];
+                if (count($service_array)>0) {
+                    $ip = $service_array[0]['ip'];
+                } else {
+                    return [tpenv($value, $default_host), $default_port];
+                }
             } catch (Exception $e) {
                 throw new Exception('ENVConsul Exception: can not reache host: '.$value);
             }
