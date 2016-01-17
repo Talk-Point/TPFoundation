@@ -106,7 +106,8 @@ if (!function_exists('envconsul')) {
                     return [tpenv($value, $default_host), $default_port];
                 }
             } catch (Exception $e) {
-                throw new Exception('ENVConsul Exception: can not reache host: '.$value);
+                return [tpenv($value, $default_host), $default_port];
+                //throw new Exception('ENVConsul Exception: can not reache host: '.$value); @todo Wie error ?
             }
             return [$ip, $port];
         } else {
