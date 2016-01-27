@@ -88,6 +88,14 @@ if ( !function_exists('is_envconsul')) {
 }
 
 if (!function_exists('envconsul')) {
+    /**
+     * @param $value
+     * @param $default_host
+     * @param $default_port
+     * @return array
+     * @throws Exception
+     * @deprecated
+     */
     function envconsul($value, $default_host, $default_port) {
         if (is_envconsul()) {
             try {
@@ -113,5 +121,51 @@ if (!function_exists('envconsul')) {
         } else {
             return [tpenv($value, $default_host), $default_port];
         }
+    }
+}
+
+// Consul Helper
+
+if ( !function_exists('tp_dns_host') ) {
+    function tp_dns_host($hostname, $default)
+    {
+        $service_array = dns_get_record($hostname, DNS_SRV);
+        if (is_array($service_array)) {
+            if (count($service_array)>0) {
+                return $service_array[0]['target'];
+            }
+        }
+        return env($hostname, $default);
+    }
+}
+
+if ( !function_exists('tp_dns_port') ) {
+    function tp_dns_port($hostname, $default)
+    {
+        $service_array = dns_get_record($hostname, DNS_SRV);
+        if (is_array($service_array)) {
+            if (count($service_array)>0) {
+                return $service_array[0]['port'];
+            }
+        }
+        return env($hostname, $default);
+    }
+}
+
+if ( !function_exists('tpenvconsul_redis') ) {
+    function tpenvconsul_redis($hostname, $hostname_default, $port_default, $datbase=0)
+    {
+        $redis_host = tp_dns_host($hostname, $hostname_default);
+        $redis_port = tp_dns_port($hostname, $port_default);
+        return ['host' => $redis_host, 'port' => $redis_port, 'database' => $datbase];
+    }
+}
+
+if ( !function_exists('tpenvconsul_beanstald') ) {
+    function tpenvconsul_beanstald($hostname, $hostname_default, $port_default, $queue='default', $ttr=60)
+    {
+        $beanstalkd_host = tp_dns_host($hostname, $hostname_default);
+        $beanstalkd_port = tp_dns_port($hostname, $port_default);
+        return ['driver' => 'beanstalkd', 'host' => $beanstalkd_host, 'port' => $beanstalkd_port, 'queue' => $queue, 'ttr' => $ttr];
     }
 }
