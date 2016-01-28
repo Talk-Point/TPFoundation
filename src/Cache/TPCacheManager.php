@@ -42,9 +42,10 @@ class TPCacheManager
         {
             case 'redis':
                 $driver = new Stash\Driver\Redis();
-                list($server, $server_port) = envconsul('TP_CACHE_SERVER', '127.0.0.1', 6379);
-                TPLog::debug('Server Config: ', ['server' => $server, 'port' => $server_port]);
-                $driver->setOptions(['servers' => [[$server, $server_port]]]);
+                $server = Config::get('database.redis.host');
+                $port = Config::get('database.redis.port');
+                TPLog::debug('Server Config: ', ['server' => $server, 'port' => $port]);
+                $driver->setOptions(['servers' => [[$server, $port]]]);
                 break;
             default:
                 $driver = new Stash\Driver\FileSystem();
