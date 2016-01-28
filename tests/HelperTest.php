@@ -64,4 +64,12 @@ class HelperTest extends PHPUnit_Framework_TestCase
         list($host, $port) = envconsul('redis-redis.service.consul', '127.0.0.1', 6379);
         var_dump($host, $port);
     }*/
+
+    public function test_str_get_inner()
+    {
+        $fullstring = 'this is my [tag]dog[/tag]';
+        $parsed = str_get_inner($fullstring, '[tag]', '[/tag]');
+
+        $this->assertEquals('dog', $parsed);
+    }
 }

@@ -169,3 +169,29 @@ if ( !function_exists('tpenvconsul_beanstald') ) {
         return ['driver' => 'beanstalkd', 'host' => $beanstalkd_host, 'port' => $beanstalkd_port, 'queue' => $queue, 'ttr' => $ttr];
     }
 }
+
+if (!function_exists('str_get_inner')) {
+    /**
+     * Parse string between
+     *
+     * Thank you to http://www.justin-cook.com/wp/2006/03/31/php-parse-a-string-between-two-strings/
+     *
+     * @param string $string
+     * @param string $start
+     * @param string $end
+     * @return string string
+     *
+     * @example
+     *   $fullstring = 'this is my [tag]dog[/tag]';
+     *   $parsed = get_string_between($fullstring, '[tag]', '[/tag]');
+     *
+     */
+    function str_get_inner($string, $start, $end){
+        $string = ' ' . $string;
+        $ini = strpos($string, $start);
+        if ($ini == 0) return '';
+        $ini += strlen($start);
+        $len = strpos($string, $end, $ini) - $ini;
+        return substr($string, $ini, $len);
+    }
+}
