@@ -6,6 +6,7 @@ use Exception;
 use RedisException;
 use Stash;
 use TPFoundation\Log\TPLog;
+use Cache;
 
 /**
  * TPCache in Stash
