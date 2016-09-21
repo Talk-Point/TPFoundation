@@ -5,7 +5,7 @@
   "type": "lib",
   "require": {
     "php": ">=5.5.9",
-    "tedivm/stash": "^0.13.1",
+    "tedivm/stash": "^0.14.1",
     "pda/pheanstalk": "^3.0",
     "predis/predis": "^1.0",
     "ramsey/uuid": "~3.0",
